@@ -1,7 +1,7 @@
 FROM ubuntu:20.04 as base
 WORKDIR /srv/app
 RUN sed -i s@/archive.ubuntu.com/@/mirrors.ustc.edu.cn/@g /etc/apt/sources.list
-RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommends python2 make g++ tzdata
+RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommends wget python2 make g++ tzdata
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo 'Asia/Shanghai' > /etc/timezone
 RUN cd /usr/local && wget -O node-v12.18.2-linux-x64.tar.gz https://install.ruanzhijun.cn/node-v12.18.2-linux-x64.tar.gz && mv node-v12.18.2-linux-x64 nodejs
