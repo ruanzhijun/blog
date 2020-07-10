@@ -45,18 +45,18 @@ relative_link: false
 future: true
 highlight:
   enable: true
-  line_number: true
-  auto_detect: false
+  line_number: false
+  auto_detect: true
   tab_replace: ''
-  wrap: true
-  hljs: false
+  wrap: false
+  hljs: true
 
 # Easy images
 easy_images:
   init: false # 默认 false；改为 true，将处理过去所有 post，通常装插件后第一次运行时使用。
   cdn_prefix:  # 默认 null; 图片前缀，在生成 html 文件时为 image 添加前缀
-  max_width: 800 # 默认 null；设置图片最大宽度
-  max_height: 800 # 默认 null；设置图片最大高度
+  max_width: 400 # 默认 null；设置图片最大宽度
+  max_height: 400 # 默认 null；设置图片最大高度
 
 post_wordcount:
   item_text: true

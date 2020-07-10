@@ -12,20 +12,24 @@
   
 
   <link rel="shortcut icon" href="/images/favicon.jpg" type="image/jpg" />
-  <meta name="description" content="简单了开发接口是否记录肯定分简单快速付借款方建设路口风扇接口">
+  <meta name="description" content="2020 年 6 月 10 日 Nginx 官方博客发文 Introducing a Technology Preview of NGINX Support for QUIC and HTTP&#x2F;3，同时对外发布了 支持 QUIC 版 Nginx 的代码 和 部署说明，从此体验 QUIC 又多了一个选择，马上体验一下。 准备工作 由于 openssl 暂时还不支持 quic，所以这个版本的 ssl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx原生支持quic">
 <meta property="og:url" content="https://ruanzhijun.cn/2020/07/10/nginx-quic/index.html">
 <meta property="og:site_name" content="ruanzhijun">
-<meta property="og:description" content="简单了开发接口是否记录肯定分简单快速付借款方建设路口风扇接口">
+<meta property="og:description" content="2020 年 6 月 10 日 Nginx 官方博客发文 Introducing a Technology Preview of NGINX Support for QUIC and HTTP&#x2F;3，同时对外发布了 支持 QUIC 版 Nginx 的代码 和 部署说明，从此体验 QUIC 又多了一个选择，马上体验一下。 准备工作 由于 openssl 暂时还不支持 quic，所以这个版本的 ssl">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ruanzhijun.cn/images/nginx-quic/quic-check-result.png">
 <meta property="article:published_time" content="2020-07-10T04:21:30.000Z">
-<meta property="article:modified_time" content="2020-07-10T06:53:18.169Z">
+<meta property="article:modified_time" content="2020-07-10T13:13:10.687Z">
 <meta property="article:author" content="ruanzhijun">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="quic">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ruanzhijun.cn/images/nginx-quic/quic-check-result.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1594367732761">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1594386800093">-->
 
   
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -52,8 +56,8 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>1</div>
-        <div><span>标签</span>0</div>
-        <div><span>分类</span>0</div>
+        <div><span>标签</span>2</div>
+        <div><span>分类</span>1</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
@@ -106,9 +110,41 @@
 </div>
   
   
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/运维相关/">运维相关</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
 
   
   
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/quic/" style="font-size: 10px;">quic</a>
+    </div>
+    
+  </div>
+
   
   
   <div class="nexmoe-widget-wrap">
@@ -140,8 +176,10 @@
         &copy; 2020 ruanzhijun
         Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+        <br><a href="http://beian.miit.gov.cn/" target="_blank">京ICP备16028275号-1</a>
     </div>
 </div><!-- .nexmoe-drawer -->
+
   </div>
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
@@ -155,8 +193,8 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2020年07月10日</a>
-    <a><i class="nexmoefont icon-areachart"></i>30 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>689 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
 </div>
 
   <div class="nexmoe-post-right">
@@ -164,12 +202,44 @@
   </div>
 
   <article>
-    <p>简单了开发接口是否记录肯定分简单快速付借款方建设路口风扇接口</p>
+    <p>2020 年 6 月 10 日 Nginx 官方博客发文 <a href="https://www.nginx.com/blog/introducing-technology-preview-nginx-support-for-quic-http-3/" target="_blank">Introducing a Technology Preview of NGINX Support for QUIC and HTTP/3</a>，同时对外发布了 <a href="https://hg.nginx.org/nginx-quic/shortlog/quic" target="_blank">支持 QUIC 版 Nginx 的代码</a> 和 <a href="https://quic.nginx.org/readme.html" target="_blank">部署说明</a>，从此体验 QUIC 又多了一个选择，马上体验一下。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>由于 openssl 暂时还不支持 quic，所以这个版本的 ssl 库需要用 boringssl</li>
+<li>编译 boringssl，需要的基础设施就更多了，需要最新版的 go，libunwind (centos 7 可以 yum，centos 8 只能编译)，cmake版本要3.0+，cmake是用来编译 boringssl 的，libunwind 是 boringssl 的依赖库</li>
+<li>boringssl 是不支持 ocsp，如果一向玩 openssl 的同学转过来想要认证自己的证书的话，还要打个让 boringssl 支持 ocsp 的补丁</li>
+</ul>
+<h2 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h2><p>编译过程总体来说还是挺顺畅的，之前看到的教程说有报错的都修复了</p>
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><p>为了可以使用 quic，需要修改 nginx 一些才配置可以生效</p>
+<pre><code class="hljs nginx"><span class="hljs-comment"># http3 reuseport，这个就是开启 nginx quic 功能的，并且 reuseport 只可以声明一次</span>
+<span class="hljs-comment"># 即：如果你有n个站点都想上 quic，那么你只需要在某一个站点加了这个 reuseport 就可以了，加多了会报错</span>
+<span class="hljs-attribute">listen</span> <span class="hljs-number">443</span> ssl http2;
+<span class="hljs-attribute">listen</span> <span class="hljs-number">443</span> http3 reuseport;
+<span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">443</span> ssl http2;
+<span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">443</span> http3 reuseport;
+
+<span class="hljs-comment"># TLS 一定要有 1.3，其他随意</span>
+<span class="hljs-attribute">ssl_protocols</span> TLSv1.<span class="hljs-number">3</span>;
+
+<span class="hljs-comment"># 开启 0-RTT</span>
+<span class="hljs-attribute">ssl_early_data</span> <span class="hljs-literal">on</span>;
+
+<span class="hljs-comment"># 加header，告诉浏览器，这个站点提供 quic 服务，可以尝试连接</span>
+<span class="hljs-attribute">add_header</span> alt-svc <span class="hljs-string">'quic=":443"; ma=2592000; v="46,43",h3-27=":443"; ma=2592000,h3-25=":443"; ma=2592000,h3-T050=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q049=":443"; ma=2592000,h3-Q048=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000'</span>;</code></pre>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>有一个网址，是可以帮你测试你的站点是否支持 quic 服务的，<a href="https://http3check.net" target="_blank">https://http3check.net</a>，当你看到下图这样的字样的时候，就证明你的 quic 服务已经搭建成功<br>但是，我一直看不到【0-RTT】的字样，原因目前还没找到<br><img src="/images/nginx-quic/quic-check-result.png"></p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><p>目前支持 quic 的浏览器也很少，而且都是实验性功能，没有明确开放出来的，要自己手动开启，以 Chrome 85 为例，浏览器地址栏输入：<a href="chrome://flags/" target="_blank">chrome://flags/</a> 回车，依次搜 quic/TLS 1.3/TLS 1.3 Early Data ，分别开启 enable 并重启浏览器，然后你的浏览器就支持 quic 了</p>
+<p>Chrome 的用户，还可以安装一个插件：<a href="https://chrome.google.com/webstore/detail/http2-and-spdy-indicator/mpbpobfflnpcgagjijhmgnchggcjblin" target="_blank">HTTP/2 and SPDY indicator</a>，当你访问的网站支持 quic 时候，会显示出绿色的闪电</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>坑终于踩完，我把这次体验的成果写成 <a href="https://github.com/share-group/shell/blob/master/install-nginx-quic.sh" target="blank">一个 shell 脚本</a></p>
+<p>但是我这个 quic 服务不是很稳定，试用 <a href="https://http3check.net" target="_blank">https://http3check.net</a> 测试的时候，一下成功，一下不成功，而且始终都没有出现 0-RTT</p>
 
   </article>
 
   <div class="nexmoe-post-meta nexmoe-rainbow">
     
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E8%BF%90%E7%BB%B4%E7%9B%B8%E5%85%B3/">运维相关</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/nginx/" rel="tag">nginx</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/quic/" rel="tag">quic</a>
     
 </div>
 
@@ -198,12 +268,13 @@
 </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1594367732764"></script>-->
+<!--<script src="/js/app.js?v=1594386800098"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
 
 
 
