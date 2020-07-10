@@ -5,13 +5,13 @@ RUN echo https://mirrors.ustc.edu.cn/alpine/v3.12/community/ >> /etc/apk/reposit
 RUN apk update && apk upgrade --available
 RUN apk add --no-cache -U python2 make g++
 COPY ./package.json ./package.json
-RUN npm i --registry https://registry.npm.taobao.org
+RUN npm i --production --registry https://registry.npm.taobao.org -g hexo yarn && yarn
 
 FROM node:14.5.0-alpine as build
 WORKDIR /srv/app
 COPY --from=base /srv/app/node_modules ./node_modules
 COPY ./ ./
-RUN npm i --production --registry https://registry.npm.taobao.org -g hexo && hexo g --debug
+RUN hexo g --debug
 
 FROM nginx:1.18.0-alpine
 WORKDIR /srv/app
