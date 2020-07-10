@@ -21,12 +21,6 @@
     "hexo-renderer-stylus": "1.1.0",
     "hexo-server": "1.0.0",
     "hexo-wordcount": "6.0.1",
-    "husky": "4.2.5",
     "rimraf": "3.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run build && git add . && git commit -m 更新文件"
-    }
   }
 }
