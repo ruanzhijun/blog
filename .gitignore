@@ -1,8 +1,10 @@
+.git
 dist/
 node_modules/
 .DS_Store
 Thumbs.db
 db.json
 *.log
+*yarn*
 public/
 .deploy*/

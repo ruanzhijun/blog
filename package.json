@@ -2,7 +2,7 @@
   "name": "ruanzhijun-blog",
   "version": "1.0.0",
   "scripts": {
-    "build": "hexo generate",
+    "build": "rimraf public && rimraf db.json && hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server"
@@ -20,6 +20,13 @@
     "hexo-renderer-marked": "3.0.0",
     "hexo-renderer-stylus": "1.1.0",
     "hexo-server": "1.0.0",
-    "hexo-wordcount": "6.0.1"
+    "hexo-wordcount": "6.0.1",
+    "husky": "4.2.5",
+    "rimraf": "3.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run build"
+    }
   }
 }
