@@ -11,7 +11,7 @@ FROM node:14.5.0-alpine as build
 WORKDIR /srv/app
 COPY --from=base /srv/app/node_modules ./node_modules
 COPY ./ ./
-RUN npm i --production --registry https://registry.npm.taobao.org hexo && hexo g
+RUN npm i --production --registry https://registry.npm.taobao.org -g hexo && hexo g
 
 FROM nginx:1.18.0-alpine
 WORKDIR /srv/app
