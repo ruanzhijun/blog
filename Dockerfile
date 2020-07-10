@@ -7,19 +7,11 @@ RUN echo 'Asia/Shanghai' > /etc/timezone
 RUN cd /usr/local && wget -O node-v14.5.0-linux-x64.tar.gz --no-check-certificate https://nodejs.org/dist/v14.5.0/node-v14.5.0-linux-x64.tar.gz
 RUN cd /usr/local && tar zxvf node-v14.5.0-linux-x64.tar.gz && mv node-v14.5.0-linux-x64 nodejs
 RUN cd /usr/bin && ln -s /usr/local/nodejs/bin/node node && ln -s /usr/local/nodejs/bin/npm npm && chmod 777 /usr/bin/node /usr/bin/npm
-RUN npm i --production --registry https://registry.npm.taobao.org -g npm node-gyp
-COPY ./package.json ./package.json
-RUN npm i --production --registry https://registry.npm.taobao.org
-
-FROM ubuntu:20.04 as build
-WORKDIR /srv/app
-COPY --from=base /usr/local/nodejs /usr/local/nodejs
-RUN cd /usr/bin && ln -s /usr/local/nodejs/bin/node node && ln -s /usr/local/nodejs/bin/npm npm && chmod 777 /usr/bin/node /usr/bin/npm
-COPY --from=base /srv/app/node_modules ./node_modules
+RUN npm i --production --registry https://registry.npm.taobao.org -g npm node-gyp hexo
 COPY ./ ./
-RUN npm i --production --registry https://registry.npm.taobao.org -g hexo && hexo g
+RUN npm i --registry https://registry.npm.taobao.org && hexo g
 
 FROM nginx:1.18.0-alpine
 WORKDIR /srv/app
 COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /srv/app/public ./public
+COPY --from=base /srv/app/public ./public
