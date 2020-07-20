@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://ruanzhijun.cn/images/nginx-rtmp/play.png">
 <meta property="og:image" content="https://ruanzhijun.cn/images/nginx-rtmp/stat.png">
 <meta property="article:published_time" content="2020-07-16T06:07:41.000Z">
-<meta property="article:modified_time" content="2020-07-20T07:42:22.353Z">
+<meta property="article:modified_time" content="2020-07-20T09:23:05.517Z">
 <meta property="article:author" content="ruanzhijun">
 <meta property="article:tag" content="nginx">
 <meta property="article:tag" content="rtmp">
@@ -32,7 +32,7 @@
 <meta name="twitter:image" content="https://ruanzhijun.cn/images/nginx-rtmp/record.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1595230986487">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1595236995723">-->
 
   
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -222,7 +222,7 @@
 <p><strong>1.RTMP</strong><br>实时消息传输协议，Real Time Messaging Protocol，是 Adobe Systems 公司为 Flash 播放器和服务器之间音频、视频和数据传输开发的开放协议。协议基于 TCP，是一个协议族，包括 RTMP 基本协议及 RTMPT/RTMPS/RTMPE 等多种变种。RTMP 是一种设计用来进行实时数据通信的网络协议，主要用来在 Flash/AIR 平台和支持RTMP协议的流媒体/交互服务器之间进行音视频和数据通信。这种方式的实时性比较强，基本能保证延迟在1-2s内，是现在国内直播主要采用的方式之一；不过使用这种协议，就必须安装flash，而H5、IOS、Android并不能原生支持flash，因此这种协议能流行多久，就不得而知了，毕竟移动端才是现在的主流。</p>
 <p><strong>2.HLS</strong><br>hls是Apple推出的直播协议，是通过视频流切片成文件片段来直播的。客户端首先会请求一个m3u8文件，里面会有不同码率的流，或者直接是ts文件列表，通过给出的ts文件地址去依次播放。在直播的时候，客户端会不断请求m3u8文件，检查ts列表是否有新的ts切片。这种方式的实时性较差，不过优势是H5、IOS、Android都原生支持。</p>
 <p><strong>3.HTTP-FLV</strong><br>HTTP-FLV就是对RTMP协议的封装，相比于RTMP，它是一个开放的协议。因此他具备了RTMP的实时性和RTMP不具备的开发性，而且随着flv.js出现（感谢B站），使得浏览器在不依赖flash的情况下，播放flv视频，从而兼容了移动端，所以现在很多直播平台，尤其是手机直播平台，都会选择它</p>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>环境搭建的第一步，安装带有 nginx-rtmp-module 模块的nginx，这不是本文讨论的范畴，如果对 nginx 安装不熟悉的同学，请搜索相关文章，或者如果想方便的同学，可以直接使用 <a href="https://github.com/share-group/shell/blob/master/install-nginx-quic.sh" target="_blank">nginx-quic安装脚本</a> 进行安装，脚本里面已经整合了 nginx-rtmp-module 模块，在 centos 7 / 8 系列的系统是可以顺利安装的。</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>环境搭建的第一步，安装带有 nginx-rtmp-module 模块的nginx，这不是本文讨论的范畴，如果对 nginx 安装不熟悉的同学，请搜索相关文章，或者如果想方便的同学，可以直接使用 <a href="https://github.com/share-group/shell/blob/master/install-nginx-quic.sh" target="_blank">nginx-quic安装脚本</a> 进行安装，脚本里面已经整合了 nginx-http-flv-module 模块 (nginx-http-flv-module 是基于 nginx-rtmp-module 开发的，功能比它更多，运行更稳定)，在 centos 7 / 8 系列的系统是可以顺利安装的。</p>
 <p>环境搭建的第二步，编辑 nginx 配置文件，让 nginx-rtmp-module 模块 on work。</p>
 <p>我们先按照官方给的demo操作一下：</p>
 <pre><code class="hljs nginx">
@@ -258,7 +258,7 @@
 	&#125;
 
 	<span class="hljs-attribute">location</span> /stat.xsl &#123;
-		<span class="hljs-attribute">root</span> /install/nginx-rtmp-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span>/;
+		<span class="hljs-attribute">root</span> /install/install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/;
 	&#125;
 
 	<span class="hljs-attribute">location</span> /control &#123;
@@ -266,11 +266,11 @@
 	&#125;
 
 	<span class="hljs-attribute">location</span> /rtmp-publisher &#123;
-		<span class="hljs-attribute">root</span> /install/nginx-rtmp-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span>/test;
+		<span class="hljs-attribute">root</span> /install/install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test;
 	&#125;
 
 	<span class="hljs-attribute">location</span> / &#123;
-		<span class="hljs-attribute">root</span> /install/nginx-rtmp-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span>/test/www;
+		<span class="hljs-attribute">root</span> /install/install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test/www;
 	&#125;
 &#125;</code></pre>
 
@@ -317,7 +317,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1595230986489"></script>-->
+<!--<script src="/js/app.js?v=1595236995729"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>

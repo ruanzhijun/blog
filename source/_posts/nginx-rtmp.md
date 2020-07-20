@@ -31,7 +31,7 @@ HTTP-FLV就是对RTMP协议的封装，相比于RTMP，它是一个开放的协�
 
 ## 环境搭建
 
-环境搭建的第一步，安装带有 nginx-rtmp-module 模块的nginx，这不是本文讨论的范畴，如果对 nginx 安装不熟悉的同学，请搜索相关文章，或者如果想方便的同学，可以直接使用 <a href="https://github.com/share-group/shell/blob/master/install-nginx-quic.sh" target="_blank">nginx-quic安装脚本</a> 进行安装，脚本里面已经整合了 nginx-rtmp-module 模块，在 centos 7 / 8 系列的系统是可以顺利安装的。
+环境搭建的第一步，安装带有 nginx-rtmp-module 模块的nginx，这不是本文讨论的范畴，如果对 nginx 安装不熟悉的同学，请搜索相关文章，或者如果想方便的同学，可以直接使用 <a href="https://github.com/share-group/shell/blob/master/install-nginx-quic.sh" target="_blank">nginx-quic安装脚本</a> 进行安装，脚本里面已经整合了 nginx-http-flv-module 模块 (nginx-http-flv-module 是基于 nginx-rtmp-module 开发的，功能比它更多，运行更稳定)，在 centos 7 / 8 系列的系统是可以顺利安装的。
 
 环境搭建的第二步，编辑 nginx 配置文件，让 nginx-rtmp-module 模块 on work。
 
@@ -70,7 +70,7 @@ server {
 	}
 
 	location /stat.xsl {
-		root /install/nginx-rtmp-module-1.2.1/;
+		root /install/install/nginx-http-flv-module-1.2.7/;
 	}
 
 	location /control {
@@ -78,11 +78,11 @@ server {
 	}
 
 	location /rtmp-publisher {
-		root /install/nginx-rtmp-module-1.2.1/test;
+		root /install/install/nginx-http-flv-module-1.2.7/test;
 	}
 
 	location / {
-		root /install/nginx-rtmp-module-1.2.1/test/www;
+		root /install/install/nginx-http-flv-module-1.2.7/test/www;
 	}
 }
 ```
