@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1595236995775">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1595237222435">-->
 
   
 <meta name="generator" content="Hexo 4.2.1"></head>
@@ -192,7 +192,7 @@
         <a href="/2020/07/16/nginx-rtmp/">
             
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 52.5%;"> 
-                    <img data-src="/images/nginx-rtmp/rtmp.png" data-sizes="auto" alt="nginx+rtmp搭建直播服务器" class="lazyload">
+                    <img data-src="/images/nginx-rtmp/cover.png" data-sizes="auto" alt="nginx+rtmp搭建直播服务器" class="lazyload">
                     <h1>nginx+rtmp搭建直播服务器</h1>
                 </div>
             
@@ -248,7 +248,7 @@
 	&#125;
 
 	<span class="hljs-attribute">location</span> /stat.xsl &#123;
-		<span class="hljs-attribute">root</span> /install/install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/;
+		<span class="hljs-attribute">root</span> /install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/;
 	&#125;
 
 	<span class="hljs-attribute">location</span> /control &#123;
@@ -256,16 +256,16 @@
 	&#125;
 
 	<span class="hljs-attribute">location</span> /rtmp-publisher &#123;
-		<span class="hljs-attribute">root</span> /install/install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test;
+		<span class="hljs-attribute">root</span> /install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test;
 	&#125;
 
 	<span class="hljs-attribute">location</span> / &#123;
-		<span class="hljs-attribute">root</span> /install/install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test/www;
+		<span class="hljs-attribute">root</span> /install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test/www;
 	&#125;
 &#125;</code></pre>
 
 <p>重启 nginx，分别访问 <a href="https://live.ruanzhijun.cn/record.html" target="_blank">推流端</a>、<a href="https://live.ruanzhijun.cn" target="_blank">拉流端</a>，已经可以实现这边录像那边播放了，还可以看到<a href="https://live.ruanzhijun.cn/stat" target="_blank">数据统计</a>。</p>
-<p>需要注意有两点：<br>1.上面的配置中 /install/nginx-rtmp-module-1.2.1 是我服务器的实际路径，请按照你实际的路径修改，其他可以照抄<br>2.demo上面的地址是localhost，我是把它换成 <a href="javascript:void(0)">live.ruanzhijun.cn</a> 的</p>
+<p>需要注意有两点：<br>1.上面的配置中 /install/nginx-http-flv-module-1.2.7 是我服务器的实际路径，请按照你实际的路径修改，其他可以照抄<br>2.demo上面的地址是localhost，我是把它换成 <a href="javascript:void(0)">live.ruanzhijun.cn</a> 的</p>
 <p><img src="/images/nginx-rtmp/record.png"><br><img src="/images/nginx-rtmp/play.png"><br><img src="/images/nginx-rtmp/stat.png"></p>
 <p>好了，官方的demo就体验完了。但是官方的demo是基于flash实现的，flash已经过时了，有时间再研究一下这块。</p>
 
@@ -331,7 +331,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1595236995777"></script>-->
+<!--<script src="/js/app.js?v=1595237222439"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>

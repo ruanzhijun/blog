@@ -1,7 +1,7 @@
 ---
 title: nginx+rtmp搭建直播服务器
 date: 2020-07-16 14:07:41
-cover: /images/nginx-rtmp/rtmp.png
+cover: /images/nginx-rtmp/cover.png
 coverWidth: 1200
 coverHeight: 630
 tags:
@@ -70,7 +70,7 @@ server {
 	}
 
 	location /stat.xsl {
-		root /install/install/nginx-http-flv-module-1.2.7/;
+		root /install/nginx-http-flv-module-1.2.7/;
 	}
 
 	location /control {
@@ -78,11 +78,11 @@ server {
 	}
 
 	location /rtmp-publisher {
-		root /install/install/nginx-http-flv-module-1.2.7/test;
+		root /install/nginx-http-flv-module-1.2.7/test;
 	}
 
 	location / {
-		root /install/install/nginx-http-flv-module-1.2.7/test/www;
+		root /install/nginx-http-flv-module-1.2.7/test/www;
 	}
 }
 ```
@@ -90,7 +90,7 @@ server {
 重启 nginx，分别访问 <a href="https://live.ruanzhijun.cn/record.html" target="_blank">推流端</a>、<a href="https://live.ruanzhijun.cn" target="_blank">拉流端</a>，已经可以实现这边录像那边播放了，还可以看到<a href="https://live.ruanzhijun.cn/stat" target="_blank">数据统计</a>。
 
 需要注意有两点：
-1.上面的配置中 /install/nginx-rtmp-module-1.2.1 是我服务器的实际路径，请按照你实际的路径修改，其他可以照抄
+1.上面的配置中 /install/nginx-http-flv-module-1.2.7 是我服务器的实际路径，请按照你实际的路径修改，其他可以照抄
 2.demo上面的地址是localhost，我是把它换成 <a href="javascript:void(0)">live.ruanzhijun.cn</a> 的
 
 ![](/images/nginx-rtmp/record.png)
