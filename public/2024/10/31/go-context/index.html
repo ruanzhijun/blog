@@ -15,17 +15,20 @@
   <meta name="description" content="Go语言，自2009年发布以来，凭借其简洁、高效、并发能力强等特点，迅速在开发者社区获得了广泛的关注和应用，特别是在服务器端开发、云计算、容器技术和微服务架构等领域。例如，Docker 和 K8S 等知名的容器技术都是使用Go语言开发的。 为什么需要context包？认识 goroutine首先让我们来认识下 goroutine。 Go语言的高并发、高性能都来源于它的并发模型：goroutine，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go语言中的context包到底解决了啥问题？">
-<meta property="og:url" content="https://ruanzhijun.cn/2024/10/31/Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84context%E5%8C%85%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E5%95%A5%E9%97%AE%E9%A2%98%EF%BC%9F/index.html">
+<meta property="og:url" content="https://ruanzhijun.cn/2024/10/31/go-context/index.html">
 <meta property="og:site_name" content="ruanzhijun">
 <meta property="og:description" content="Go语言，自2009年发布以来，凭借其简洁、高效、并发能力强等特点，迅速在开发者社区获得了广泛的关注和应用，特别是在服务器端开发、云计算、容器技术和微服务架构等领域。例如，Docker 和 K8S 等知名的容器技术都是使用Go语言开发的。 为什么需要context包？认识 goroutine首先让我们来认识下 goroutine。 Go语言的高并发、高性能都来源于它的并发模型：goroutine，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-31T05:29:50.000Z">
-<meta property="article:modified_time" content="2024-10-31T05:31:32.876Z">
+<meta property="article:modified_time" content="2024-10-31T05:39:23.847Z">
 <meta property="article:author" content="ruanzhijun">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="rtmp">
+<meta property="article:tag" content="直播">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1730352817331">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1730353199385">-->
 
   
 <meta name="generator" content="Hexo 7.3.0"></head>
@@ -121,7 +124,7 @@
 
         <li class="category-list-item">
           <a class="category-list-link" href="/categories/技术文章/">技术文章</a>
-          <span class="category-list-count">1</span>
+          <span class="category-list-count">2</span>
         </li>
 
         
@@ -143,7 +146,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">标签云</h3>
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/quic/" style="font-size: 10px;">quic</a> <a href="/tags/rtmp/" style="font-size: 10px;">rtmp</a> <a href="/tags/%E7%9B%B4%E6%92%AD/" style="font-size: 10px;">直播</a>
+      <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/quic/" style="font-size: 10px;">quic</a> <a href="/tags/rtmp/" style="font-size: 15px;">rtmp</a> <a href="/tags/%E7%9B%B4%E6%92%AD/" style="font-size: 15px;">直播</a>
     </div>
     
   </div>
@@ -166,7 +169,7 @@
       <ul>
         
           <li>
-            <a href="/2024/10/31/Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84context%E5%8C%85%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E5%95%A5%E9%97%AE%E9%A2%98%EF%BC%9F/">Go语言中的context包到底解决了啥问题？</a>
+            <a href="/2024/10/31/go-context/">Go语言中的context包到底解决了啥问题？</a>
           </li>
         
           <li>
@@ -197,7 +200,7 @@
         <div class="nexmoe-post">
   
       <div class="nexmoe-post-cover" style="padding-bottom: NaN%;"> 
-          <img data-src="" data-sizes="auto" alt="Go语言中的context包到底解决了啥问题？" class="lazyload">
+          <img data-src="/images/go-context/cover.png" data-sizes="auto" alt="Go语言中的context包到底解决了啥问题？" class="lazyload">
           <h1>Go语言中的context包到底解决了啥问题？</h1>
       </div>
   
@@ -420,6 +423,10 @@ case &lt;-ctx<span class="hljs-selector-class">.Done</span>():
 
   <div class="nexmoe-post-meta nexmoe-rainbow">
     
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/nginx/" rel="tag">nginx</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/rtmp/" rel="tag">rtmp</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag">直播</a>
     
 </div>
 
@@ -450,7 +457,7 @@ case &lt;-ctx<span class="hljs-selector-class">.Done</span>():
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1730352817332"></script>-->
+<!--<script src="/js/app.js?v=1730353199386"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>

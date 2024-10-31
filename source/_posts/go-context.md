@@ -1,8 +1,15 @@
 ---
 title: Go语言中的context包到底解决了啥问题？
 date: 2024-10-31 13:29:50
+cover: /images/go-context/cover.png
 tags:
+  - nginx
+  - rtmp
+  - 直播
+categories:
+  - 技术文章
 ---
+
 
 Go语言，自2009年发布以来，凭借其简洁、高效、并发能力强等特点，迅速在开发者社区获得了广泛的关注和应用，特别是在服务器端开发、云计算、容器技术和微服务架构等领域。例如，Docker 和 K8S 等知名的容器技术都是使用Go语言开发的。
 

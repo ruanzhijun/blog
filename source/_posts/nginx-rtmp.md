@@ -2,8 +2,6 @@
 title: nginx+rtmp搭建直播服务器
 date: 2020-07-16 14:07:41
 cover: /images/nginx-rtmp/cover.png
-coverWidth: 1200
-coverHeight: 630
 tags:
  - nginx
  - rtmp

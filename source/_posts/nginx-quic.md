@@ -2,8 +2,6 @@
 title: nginx原生支持quic
 date: 2020-07-10 12:21:30
 cover: /images/nginx-quic/cover.png
-coverWidth: 2000
-coverHeight: 1747
 tags:
  - nginx
  - quic
