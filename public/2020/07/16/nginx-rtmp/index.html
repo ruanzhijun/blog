@@ -12,12 +12,12 @@
   
 
   <link rel="shortcut icon" href="/images/favicon.jpg" type="image/jpg" />
-  <meta name="description" content="最近有朋友入职直播公司，在闲聊的过程中，激起了对直播业务的兴趣，很想去了解一下是怎么实现的。经过一翻搜索，发现比较主流的是nginx+rtmp方案，今天就来学习一下这个是怎么实现的。 今天的目标就是搭建一个可以推流&#x2F;拉流的服务器，实现一个直播业务最简单的闭环。 知识扫盲我们先了解一下先关的知识： 1.RTMP实时消息传输协议，Real Time Messaging Protocol，是 Adobe">
+  <meta name="description" content="最近有朋友入职直播公司，在闲聊的过程中，激起了对直播业务的兴趣，很想去了解一下是怎么实现的。经过一翻搜索，发现比较主流的是nginx+rtmp方案，今天就来学习一下这个是怎么实现的。 今天的目标就是搭建一个可以推流&#x2F;拉流的服务器，实现一个直播业务最简单的闭环。 知识扫盲我们先了解一下先关的知识： 1.RTMP实时消息传输协议，Real Time Messaging Protocol，是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx+rtmp搭建直播服务器">
 <meta property="og:url" content="https://ruanzhijun.cn/2020/07/16/nginx-rtmp/index.html">
 <meta property="og:site_name" content="ruanzhijun">
-<meta property="og:description" content="最近有朋友入职直播公司，在闲聊的过程中，激起了对直播业务的兴趣，很想去了解一下是怎么实现的。经过一翻搜索，发现比较主流的是nginx+rtmp方案，今天就来学习一下这个是怎么实现的。 今天的目标就是搭建一个可以推流&#x2F;拉流的服务器，实现一个直播业务最简单的闭环。 知识扫盲我们先了解一下先关的知识： 1.RTMP实时消息传输协议，Real Time Messaging Protocol，是 Adobe">
+<meta property="og:description" content="最近有朋友入职直播公司，在闲聊的过程中，激起了对直播业务的兴趣，很想去了解一下是怎么实现的。经过一翻搜索，发现比较主流的是nginx+rtmp方案，今天就来学习一下这个是怎么实现的。 今天的目标就是搭建一个可以推流&#x2F;拉流的服务器，实现一个直播业务最简单的闭环。 知识扫盲我们先了解一下先关的知识： 1.RTMP实时消息传输协议，Real Time Messaging Protocol，是">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ruanzhijun.cn/images/nginx-rtmp/record.png">
 <meta property="og:image" content="https://ruanzhijun.cn/images/nginx-rtmp/play.png">
@@ -32,10 +32,10 @@
 <meta name="twitter:image" content="https://ruanzhijun.cn/images/nginx-rtmp/record.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1595237441006">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1730352817333">-->
 
   
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body class="mdui-drawer-body-left">
   
@@ -58,7 +58,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>文章</span>2</div>
+        <div><span>文章</span>3</div>
         <div><span>标签</span>4</div>
         <div><span>分类</span>2</div>
     </div>
@@ -160,7 +160,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">文章归档</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
     </div>
   </div>
 
@@ -171,6 +171,10 @@
     <h3 class="nexmoe-widget-title">最新文章</h3>
     <div class="nexmoe-widget">
       <ul>
+        
+          <li>
+            <a href="/2024/10/31/Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84context%E5%8C%85%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E5%95%A5%E9%97%AE%E9%A2%98%EF%BC%9F/">Go语言中的context包到底解决了啥问题？</a>
+          </li>
         
           <li>
             <a href="/2020/07/16/nginx-rtmp/">nginx+rtmp搭建直播服务器</a>
@@ -187,7 +191,7 @@
   
 </aside>
     <div class="nexmoe-copyright">
-        &copy; 2020 ruanzhijun
+        &copy; 2024 ruanzhijun
         Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
         <br><a href="http://beian.miit.gov.cn/" target="_blank">京ICP备16028275号-1</a>
@@ -217,12 +221,12 @@
 
   <article>
     <p>最近有朋友入职直播公司，在闲聊的过程中，激起了对直播业务的兴趣，很想去了解一下是怎么实现的。经过一翻搜索，发现比较主流的是nginx+rtmp方案，今天就来学习一下这个是怎么实现的。</p>
-<p>今天的目标就是搭建一个<a href="javascript:void(0)">可以推流/拉流</a>的服务器，实现一个直播业务最简单的闭环。</p>
+<p>今天的目标就是搭建一个<a href="javascript:void(0)">可以推流&#x2F;拉流</a>的服务器，实现一个直播业务最简单的闭环。</p>
 <h2 id="知识扫盲"><a href="#知识扫盲" class="headerlink" title="知识扫盲"></a>知识扫盲</h2><p>我们先了解一下先关的知识：</p>
-<p><strong>1.RTMP</strong><br>实时消息传输协议，Real Time Messaging Protocol，是 Adobe Systems 公司为 Flash 播放器和服务器之间音频、视频和数据传输开发的开放协议。协议基于 TCP，是一个协议族，包括 RTMP 基本协议及 RTMPT/RTMPS/RTMPE 等多种变种。RTMP 是一种设计用来进行实时数据通信的网络协议，主要用来在 Flash/AIR 平台和支持RTMP协议的流媒体/交互服务器之间进行音视频和数据通信。这种方式的实时性比较强，基本能保证延迟在1-2s内，是现在国内直播主要采用的方式之一；不过使用这种协议，就必须安装flash，而H5、IOS、Android并不能原生支持flash，因此这种协议能流行多久，就不得而知了，毕竟移动端才是现在的主流。</p>
+<p><strong>1.RTMP</strong><br>实时消息传输协议，Real Time Messaging Protocol，是 Adobe Systems 公司为 Flash 播放器和服务器之间音频、视频和数据传输开发的开放协议。协议基于 TCP，是一个协议族，包括 RTMP 基本协议及 RTMPT&#x2F;RTMPS&#x2F;RTMPE 等多种变种。RTMP 是一种设计用来进行实时数据通信的网络协议，主要用来在 Flash&#x2F;AIR 平台和支持RTMP协议的流媒体&#x2F;交互服务器之间进行音视频和数据通信。这种方式的实时性比较强，基本能保证延迟在1-2s内，是现在国内直播主要采用的方式之一；不过使用这种协议，就必须安装flash，而H5、IOS、Android并不能原生支持flash，因此这种协议能流行多久，就不得而知了，毕竟移动端才是现在的主流。</p>
 <p><strong>2.HLS</strong><br>hls是Apple推出的直播协议，是通过视频流切片成文件片段来直播的。客户端首先会请求一个m3u8文件，里面会有不同码率的流，或者直接是ts文件列表，通过给出的ts文件地址去依次播放。在直播的时候，客户端会不断请求m3u8文件，检查ts列表是否有新的ts切片。这种方式的实时性较差，不过优势是H5、IOS、Android都原生支持。</p>
 <p><strong>3.HTTP-FLV</strong><br>HTTP-FLV就是对RTMP协议的封装，相比于RTMP，它是一个开放的协议。因此他具备了RTMP的实时性和RTMP不具备的开发性，而且随着flv.js出现（感谢B站），使得浏览器在不依赖flash的情况下，播放flv视频，从而兼容了移动端，所以现在很多直播平台，尤其是手机直播平台，都会选择它</p>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>环境搭建的第一步，安装带有 nginx-rtmp-module 模块的nginx，这不是本文讨论的范畴，如果对 nginx 安装不熟悉的同学，请搜索相关文章，或者如果想方便的同学，可以直接使用 <a href="https://github.com/share-group/shell/blob/master/install-nginx-quic.sh" target="_blank">nginx-quic安装脚本</a> 进行安装，脚本里面已经整合了 nginx-http-flv-module 模块 (nginx-http-flv-module 是基于 nginx-rtmp-module 开发的，功能比它更多，运行更稳定)，在 centos 7 / 8 系列的系统是可以顺利安装的。</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>环境搭建的第一步，安装带有 nginx-rtmp-module 模块的nginx，这不是本文讨论的范畴，如果对 nginx 安装不熟悉的同学，请搜索相关文章，或者如果想方便的同学，可以直接使用 <a href="https://github.com/share-group/shell/blob/master/install-nginx-quic.sh" target="_blank">nginx-quic安装脚本</a> 进行安装，脚本里面已经整合了 nginx-http-flv-module 模块 (nginx-http-flv-module 是基于 nginx-rtmp-module 开发的，功能比它更多，运行更稳定)，在 centos 7 &#x2F; 8 系列的系统是可以顺利安装的。</p>
 <p>环境搭建的第二步，编辑 nginx 配置文件，让 nginx-rtmp-module 模块 on work。</p>
 <p>我们先按照官方给的demo操作一下：</p>
 <pre><code class="hljs nginx">
@@ -252,30 +256,30 @@
 	<span class="hljs-attribute">server_name</span> live.ruanzhijun.cn;
 	<span class="hljs-attribute">autoindex</span> <span class="hljs-literal">off</span>;
 
-	<span class="hljs-attribute">location</span> /stat &#123;
+	<span class="hljs-section">location</span> /stat &#123;
 		<span class="hljs-attribute">rtmp_stat</span> all;
 		<span class="hljs-attribute">rtmp_stat_stylesheet</span> stat.xsl;
 	&#125;
 
-	<span class="hljs-attribute">location</span> /stat.xsl &#123;
+	<span class="hljs-section">location</span> /stat.xsl &#123;
 		<span class="hljs-attribute">root</span> /install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/;
 	&#125;
 
-	<span class="hljs-attribute">location</span> /control &#123;
+	<span class="hljs-section">location</span> /control &#123;
 		<span class="hljs-attribute">rtmp_control</span> all;
 	&#125;
 
-	<span class="hljs-attribute">location</span> /rtmp-publisher &#123;
+	<span class="hljs-section">location</span> /rtmp-publisher &#123;
 		<span class="hljs-attribute">root</span> /install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test;
 	&#125;
 
-	<span class="hljs-attribute">location</span> / &#123;
+	<span class="hljs-section">location</span> / &#123;
 		<span class="hljs-attribute">root</span> /install/nginx-http-flv-module-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">7</span>/test/www;
 	&#125;
 &#125;</code></pre>
 
 <p>重启 nginx，分别访问 <a href="https://live.ruanzhijun.cn/record.html" target="_blank">推流端</a>、<a href="https://live.ruanzhijun.cn" target="_blank">拉流端</a>，已经可以实现这边录像那边播放了，还可以看到<a href="https://live.ruanzhijun.cn/stat" target="_blank">数据统计</a>。</p>
-<p>需要注意有两点：<br>1.上面的配置中 /install/nginx-http-flv-module-1.2.7 是我服务器的实际路径，请按照你实际的路径修改，其他可以照抄<br>2.demo上面的地址是localhost，我是把它换成 <a href="javascript:void(0)">live.ruanzhijun.cn</a> 的</p>
+<p>需要注意有两点：<br>1.上面的配置中 &#x2F;install&#x2F;nginx-http-flv-module-1.2.7 是我服务器的实际路径，请按照你实际的路径修改，其他可以照抄<br>2.demo上面的地址是localhost，我是把它换成 <a href="javascript:void(0)">live.ruanzhijun.cn</a> 的</p>
 <p><img src="/images/nginx-rtmp/record.png"><br><img src="/images/nginx-rtmp/play.png"><br><img src="/images/nginx-rtmp/stat.png"></p>
 <p>好了，官方的demo就体验完了。但是官方的demo是基于flash实现的，flash已经过时了，有时间再研究一下这块。</p>
 
@@ -286,7 +290,7 @@
         <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a>
     
     
-        <a class="nexmoefont icon-tag-fill -link" href="/tags/nginx/" rel="tag">nginx</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/rtmp/" rel="tag">rtmp</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag">直播</a>
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/nginx/" rel="tag">nginx</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/rtmp/" rel="tag">rtmp</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag">直播</a>
     
 </div>
 
@@ -317,7 +321,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1595237441012"></script>-->
+<!--<script src="/js/app.js?v=1730352817333"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
