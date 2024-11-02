@@ -2,7 +2,7 @@
   "name": "ruanzhijun-blog",
   "version": "1.0.0",
   "scripts": {
-    "build": "rimraf public && rimraf db.json && hexo generate && copyfiles app-ads.txt about.html about.jpeg public",
+    "build": "rimraf public && rimraf db.json && hexo generate && copyfiles app-ads.txt about.html PY.html about.jpeg public",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
