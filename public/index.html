@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1730354336707">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1730526841425">-->
 
   
 <meta name="generator" content="Hexo 7.3.0"></head>
@@ -47,8 +47,8 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>文章</span>3</div>
-        <div><span>标签</span>4</div>
+        <div><span>文章</span>4</div>
+        <div><span>标签</span>6</div>
         <div><span>分类</span>2</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -117,7 +117,7 @@
 
         <li class="category-list-item">
           <a class="category-list-link" href="/categories/技术文章/">技术文章</a>
-          <span class="category-list-count">2</span>
+          <span class="category-list-count">3</span>
         </li>
 
         
@@ -139,7 +139,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">标签云</h3>
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/quic/" style="font-size: 10px;">quic</a> <a href="/tags/rtmp/" style="font-size: 15px;">rtmp</a> <a href="/tags/%E7%9B%B4%E6%92%AD/" style="font-size: 15px;">直播</a>
+      <a href="/tags/go/" style="font-size: 20px;">go</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/quic/" style="font-size: 10px;">quic</a> <a href="/tags/rtmp/" style="font-size: 10px;">rtmp</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E7%9B%B4%E6%92%AD/" style="font-size: 10px;">直播</a>
     </div>
     
   </div>
@@ -149,7 +149,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">文章归档</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
     </div>
   </div>
 
@@ -160,6 +160,10 @@
     <h3 class="nexmoe-widget-title">最新文章</h3>
     <div class="nexmoe-widget">
       <ul>
+        
+          <li>
+            <a href="/2024/11/02/goroutine/">Go Goroutine 究竟可以开多少</a>
+          </li>
         
           <li>
             <a href="/2024/10/31/go-context/">Go语言中的context包到底解决了啥问题？</a>
@@ -191,6 +195,228 @@
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
         <section class="nexmoe-posts">
+    
+    <div class="nexmoe-post">
+        <a href="/2024/11/02/goroutine/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;"> 
+                    <img data-src="/images/goroutine/cover.jpeg" data-sizes="auto" alt="Go Goroutine 究竟可以开多少" class="lazyload">
+                    <h1>Go Goroutine 究竟可以开多少</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2024年11月02日</a>
+            <a><i class="nexmoefont icon-areachart"></i>1.5k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
+        </div>
+
+        <article>
+            
+                <p>要知道Goroutine最多可以开多少，我们要先搞清楚下面几个问题</p>
+<p>1.Goroutine 是什么<br>2.开Goroutine 需要消耗什么资源</p>
+<h2 id="Goroutine-是什么？"><a href="#Goroutine-是什么？" class="headerlink" title="Goroutine 是什么？"></a><strong>Goroutine 是什么？</strong></h2><p>Go抽象出来的轻量级线程，在应用层做调度，让我们能够很方便的进行并发编程。</p>
+<p>通过<code>go</code>关键字就可以启动</p>
+<blockquote>
+<p>译器会通过<code>cmd/compile/internal/gc.state.stmt</code>和<code>cmd/compile/internal/gc.state.call</code>两个方法将该关键字转换成<code>runtime.newproc</code>函数调用，详细分析可以看<a href='https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/' target='_blank'>[《Go设计与实现》]</a></p>
+</blockquote>
+<p>启动一个新的 Goroutine 来执行任务时，会通过<code>runtime.newproc</code>初始化一个<code>g</code>来运行协程</p>
+<h2 id="Goroutine-需要消耗多少资源？"><a href="#Goroutine-需要消耗多少资源？" class="headerlink" title="Goroutine 需要消耗多少资源？"></a><strong>Goroutine 需要消耗多少资源？</strong></h2><p><strong>内存的消耗</strong></p>
+<p>通过开启协程并进行阻塞，来查看前后内存的变化情况</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getGoroutineMemConsume</span><span class="hljs-params">()</span></span> &#123;
+	<span class="hljs-keyword">var</span> c <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>
+	<span class="hljs-keyword">var</span> wg sync.WaitGroup
+	<span class="hljs-keyword">const</span> goroutineNum = <span class="hljs-number">1000000</span>
+
+	memConsumed := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> <span class="hljs-type">uint64</span> &#123;
+		runtime.GC() <span class="hljs-comment">//GC，排除对象影响</span>
+		<span class="hljs-keyword">var</span> memStat runtime.MemStats
+		runtime.ReadMemStats(&amp;memStat)
+		<span class="hljs-keyword">return</span> memStat.Sys
+	&#125;
+
+	noop := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;
+		wg.Done()
+		&lt;-c <span class="hljs-comment">//防止goroutine退出，内存被释放</span>
+	&#125;
+
+	wg.Add(goroutineNum)
+	before := memConsumed() <span class="hljs-comment">//获取创建goroutine前内存</span>
+	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; goroutineNum; i++ &#123;
+		<span class="hljs-keyword">go</span> noop()
+	&#125;
+	wg.Wait()
+	after := memConsumed() <span class="hljs-comment">//获取创建goroutine后内存</span>
+	fmt.Println(runtime.NumGoroutine())
+	fmt.Printf(<span class="hljs-string">&quot;%.3f KB bytes\n&quot;</span>, <span class="hljs-type">float64</span>(after-before)/goroutineNum/<span class="hljs-number">1024</span>)
+&#125;</code></pre>
+
+<p><strong>结果分析：</strong></p>
+<p>每个协程至少需要消耗 2KB 的空间，那么假设计算机的内存是 2GB，那么至多允许 2GB&#x2F;2KB &#x3D; 1M 个协程同时存在。</p>
+<p><strong>CPU的消耗</strong></p>
+<p>一个Goroutine消耗多少CPU 实际上跟执行函数的逻辑有着很大的关系，如果执行的函数是CPU密集型的计算，并且持续的时间很长，那么这个时候CPU就会优先到达瓶颈。</p>
+<p>衡量一段代码能开多少协程同时并发在跑，还得看程序内跑是什么内容，如果都是非常消耗内存的网络操作，几个Goroutine就可以跑崩溃</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>协程数能看多少取决于打开协程处理方法所占的CPU和内存，如果只是空的操作，那么理论上内存会首先成为瓶颈，此时2G的内存跑满之后程序会出现错误。如果是CPU密集型的话则可能两三个协程就会让程序出现异常。</p>
+<h2 id="Goroutine-过多常见触发的问题"><a href="#Goroutine-过多常见触发的问题" class="headerlink" title="Goroutine 过多常见触发的问题"></a><strong>Goroutine 过多常见触发的问题</strong></h2><p><strong>1.too many open files，</strong> 这种情况下因为打开的文件socket 过多</p>
+<p><strong>2.out of memory</strong></p>
+<h2 id="业务中的应用"><a href="#业务中的应用" class="headerlink" title="业务中的应用"></a>业务中的应用</h2><h3 id="如何控制并发数-？"><a href="#如何控制并发数-？" class="headerlink" title="如何控制并发数 ？"></a><strong>如何控制并发数 ？</strong></h3><blockquote>
+<p>runtime.NumGoroutine() 可以监控 Goroutine的数量</p>
+</blockquote>
+<p><strong>1.任务只有一个协程在运行</strong></p>
+<p>接口需要如果打开并发去进行操作时则需要在应用层控制好并发数，比如开Goroutine初始化资源的数据只需要初始化一次，不需要多个协程同时去进行初始化，可以通过<code>running flag</code>来判断是否正在初始化</p>
+<pre><code class="hljs go"><span class="hljs-comment">// SingerConcurrencyRunner 保证任务只有一个在跑</span>
+<span class="hljs-keyword">type</span> SingerConcurrencyRunner <span class="hljs-keyword">struct</span> &#123;
+	isRunning <span class="hljs-type">bool</span>
+	sync.Mutex
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewSingerConcurrencyRunner</span><span class="hljs-params">()</span></span> *SingerConcurrencyRunner &#123;
+	<span class="hljs-keyword">return</span> &amp;SingerConcurrencyRunner&#123;&#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *SingerConcurrencyRunner)</span></span> markRunning() (ok <span class="hljs-type">bool</span>) &#123;
+	c.Lock()
+	<span class="hljs-keyword">defer</span> c.Unlock()
+	<span class="hljs-comment">// 二次检查，避免外部检查成功后又被其他协程抢占</span>
+	<span class="hljs-keyword">if</span> c.isRunning &#123;
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+	&#125;
+	<span class="hljs-comment">// 标记成功</span>
+	c.isRunning = <span class="hljs-literal">true</span>
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *SingerConcurrencyRunner)</span></span> unmarkRunning() (ok <span class="hljs-type">bool</span>) &#123;
+	c.Lock()
+	<span class="hljs-keyword">defer</span> c.Unlock()
+	<span class="hljs-keyword">if</span> !c.isRunning &#123;
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+	&#125;
+	<span class="hljs-comment">// unmark 成功</span>
+	c.isRunning = <span class="hljs-literal">false</span>
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *SingerConcurrencyRunner)</span></span> Run(f <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span>) &#123;
+	<span class="hljs-comment">// 如果已经有并发在跑，则不进入，直接返回，可以防止开过多Goroutine导致内存消耗</span>
+	<span class="hljs-keyword">if</span> c.isRunning &#123;
+		<span class="hljs-keyword">return</span>
+	&#125;
+	<span class="hljs-keyword">if</span> !c.markRunning() &#123;
+		<span class="hljs-comment">//抢占失败则直接返回</span>
+		<span class="hljs-keyword">return</span>
+	&#125;
+
+	<span class="hljs-comment">// 执行真正的逻辑</span>
+	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;
+		<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;
+			<span class="hljs-keyword">if</span> err := <span class="hljs-built_in">recover</span>(); err != <span class="hljs-literal">nil</span> &#123;
+				<span class="hljs-comment">// log</span>
+			&#125;
+		&#125;()
+		f()
+		c.unmarkRunning()
+	&#125;()
+&#125;</code></pre>
+
+<p>可靠性测试，看是否有超过2个协程在运行</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestConcurrency</span><span class="hljs-params">(t *testing.T)</span></span> &#123;
+	runner := NewConcurrencyRunner()
+	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000</span>; i++ &#123;
+		runner.Run(f)
+	&#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f</span><span class="hljs-params">()</span></span> &#123;
+        <span class="hljs-comment">// 这里一直不会超过对应协程数</span>
+	<span class="hljs-keyword">if</span> runtime.NumGoroutine() &gt; <span class="hljs-number">3</span> &#123;
+		fmt.Println(<span class="hljs-string">&quot;&gt;3&quot;</span>, runtime.NumGoroutine())
+	&#125;
+&#125;</code></pre>
+
+<p><strong>2.任务有指定协程数运行</strong></p>
+<p>其他协程则进入等待并设置对应的超时，或者可以用旧数据直接进行返回，则无需等待。</p>
+<blockquote>
+<p><a href='https://github.com/Jeffail/tunny' target='_blank'>https://github.com/Jeffail/tunny</a></p>
+</blockquote>
+<p>通过该包可以实现协程数的控制，如果<code>Worker</code>已经全部被占满的话，则不会获得 WorkRequest 进行处理 ，而是写入在<code>reqChan</code>中进行等待</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(w *workerWrapper)</span></span> run() &#123;
+<span class="hljs-comment">//...</span>
+        <span class="hljs-keyword">for</span> &#123;
+		<span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> Blocking here will prevent the worker from closing down.</span>
+		w.worker.BlockUntilReady()
+		<span class="hljs-keyword">select</span> &#123;
+		<span class="hljs-keyword">case</span> w.reqChan &lt;- workRequest&#123;
+			jobChan:       jobChan,
+			retChan:       retChan,
+			interruptFunc: w.interrupt,
+		&#125;:
+			<span class="hljs-keyword">select</span> &#123;
+
+			<span class="hljs-keyword">case</span> payload := &lt;-jobChan:
+				result := w.worker.Process(payload)
+				<span class="hljs-keyword">select</span> &#123;
+				<span class="hljs-keyword">case</span> retChan &lt;- result:
+				<span class="hljs-keyword">case</span> &lt;-w.interruptChan:
+					w.interruptChan = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;)
+				&#125;
+<span class="hljs-comment">//...</span>
+		&#125;
+	&#125;
+<span class="hljs-comment">//...</span>
+&#125;</code></pre>
+
+<p>这里实现的方式是通过常驻的<code>Goroutine</code>进行实现，当改变Size之后会新增<code>Worker</code>来执行，另一种实现方式可以使用<code>chan</code>来控制是否开启协程，如果缓冲区已经被写满了数据，则不能再开启新的Goroutine 进行处理 。</p>
+<pre><code class="hljs go"><span class="hljs-keyword">type</span> ProcessFunc <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, param <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span>
+
+<span class="hljs-keyword">type</span> MultiConcurrency <span class="hljs-keyword">struct</span> &#123;
+	ch <span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;
+	f  ProcessFunc
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewMultiConcurrency</span><span class="hljs-params">(size <span class="hljs-type">int</span>, f ProcessFunc)</span></span> *MultiConcurrency &#123;
+	<span class="hljs-keyword">return</span> &amp;MultiConcurrency&#123;
+		ch: <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;, size),
+		f:  f,
+	&#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(m *MultiConcurrency)</span></span> Run(ctx context.Context, param <span class="hljs-keyword">interface</span>&#123;&#125;) &#123;
+	<span class="hljs-comment">// 如果缓冲区已满则不进入</span>
+	m.ch &lt;- <span class="hljs-keyword">struct</span>&#123;&#125;&#123;&#125;
+	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;
+		<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;
+			<span class="hljs-comment">// 释放缓冲区</span>
+			&lt;-m.ch
+			<span class="hljs-keyword">if</span> err := <span class="hljs-built_in">recover</span>(); err != <span class="hljs-literal">nil</span> &#123;
+				fmt.Println(err)
+			&#125;
+		&#125;()
+		m.f(ctx, param)
+	&#125;()
+&#125;</code></pre>
+
+<p>增加测试，协程数不超过13</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">mockFunc</span><span class="hljs-params">(ctx context.Context, param <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;
+	fmt.Println(param)
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestNewMultiConcurrency_Run</span><span class="hljs-params">(t *testing.T)</span></span> &#123;
+	concurrency := NewMultiConcurrency(<span class="hljs-number">10</span>, mockFunc)
+	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++ &#123;
+		concurrency.Run(context.Background(), i)
+		<span class="hljs-keyword">if</span> runtime.NumGoroutine() &gt; <span class="hljs-number">13</span> &#123;
+			fmt.Println(<span class="hljs-string">&quot;goroutine&quot;</span>, runtime.NumGoroutine())
+		&#125;
+	&#125;
+&#125;</code></pre>
+
+<p>通过这种方式可以不用让内存中常驻许多正在跑的协程，但是实际上如果常驻了100个协程也仅仅会带来2kb * 100 &#x3D; 200kb 的内存消耗，所以基本可以忽略不计。</p>
+
+            
+        </article>
+    </div>
     
     <div class="nexmoe-post">
         <a href="/2024/10/31/go-context/">
@@ -560,7 +786,7 @@ case &lt;-ctx<span class="hljs-selector-class">.Done</span>():
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1730354336707"></script>-->
+<!--<script src="/js/app.js?v=1730526841425"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
